@@ -1,10 +1,6 @@
 #前置作業 安裝對應的 WebDriver
 #下載selenium
-#5/10加入自動定位指針、監聽enter鍵(使用JavaScript)
-#5/29加入ddddocr辨識驗證碼
-#8/27全改
-#8/28加入GUI介面
-#9/17增加羽球場
+
 import tkinter as tk
 from tkinter import ttk, messagebox
 from selenium import webdriver
@@ -18,7 +14,7 @@ import os
 class VenueBookingGUI:
     def __init__(self, root):
         self.root = root
-        self.root.title("搶場機器人6.0")
+        self.root.title("搶場機器人")
         self.root.geometry("430x680")
 
         # 樣式配置
@@ -40,7 +36,7 @@ class VenueBookingGUI:
 
         # 帳號
         ttk.Label(self.main_frame, text="帳號").pack(anchor="w", pady=5)
-        self.email_var = tk.StringVar(value="411225038")
+        self.email_var = tk.StringVar(value="")
         email_frame = ttk.Frame(self.main_frame)
         email_frame.pack(fill="x", pady=5)
         email_entry_frame = ttk.Frame(email_frame)
@@ -51,7 +47,7 @@ class VenueBookingGUI:
 
         # 密碼
         ttk.Label(self.main_frame, text="密碼").pack(anchor="w", pady=5)
-        self.password_var = tk.StringVar(value="2005.08.08")
+        self.password_var = tk.StringVar(value="")
         pw_frame = ttk.Frame(self.main_frame)
         pw_frame.pack(fill="x", pady=5)
         pw_entry_frame = ttk.Frame(pw_frame)
