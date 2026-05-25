@@ -275,7 +275,32 @@ class BookingWorker:
                 self._done(False, f"運動類型選擇失敗: {e}")
                 return
             time.sleep(0.6)
+            
+            # 選兩次以防網頁沒讀取到
+            self._status(f"選擇 {self.data['sport_type']} / {self.data['venue']}", "accent")
+            try:
+                sport_dropdown = WebDriverWait(self.driver, 10).until(
+                    EC.presence_of_element_located((By.ID, "MainContent_drpkind"))
+                )
+                Select(sport_dropdown).select_by_visible_text(self.data["sport_type"])
+                self._log(f"選擇運動類型: {self.data['sport_type']}")
+            except Exception as e:
+                self._done(False, f"運動類型選擇失敗: {e}")
+                return
+            time.sleep(0.6)
 
+            try:
+                venue_dropdown = WebDriverWait(self.driver, 10).until(
+                    EC.presence_of_element_located((By.ID, "MainContent_DropDownList1"))
+                )
+                Select(venue_dropdown).select_by_visible_text(self.data["venue"])
+                self._log(f"選擇場地: {self.data['venue']}")
+            except Exception as e:
+                self._done(False, f"場地選擇失敗: {e}")
+                return
+            time.sleep(0.6)
+            
+            # 選兩次以防網頁沒讀取到
             try:
                 venue_dropdown = WebDriverWait(self.driver, 10).until(
                     EC.presence_of_element_located((By.ID, "MainContent_DropDownList1"))
